@@ -77,11 +77,33 @@ export default function App() {
   const next = getNext();
 
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ 
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    minHeight: "100vh",
+    paddingTop: 50,
+    background: "#f5f5f5"
+  }}>
+    <div style={{
+      width: 500,
+      background: "#fff",
+      padding: 30,
+      borderRadius: 10,
+      boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+    }}>
       <h1>Inquiry Tool (Cloud Sync)</h1>
 
-      <h2>Next: {next.person}</h2>
-      <button onClick={assignNext}>Confirm</button>
+      <div style={{
+  background: "#f3f3f3",
+  padding: 20,
+  marginBottom: 20,
+  textAlign: "center"
+}}>
+  <p>Next Assigned To:</p>
+  <h2 style={{ fontSize: 40 }}>{next.person}</h2>
+  <button onClick={assignNext}>Confirm Assignment</button>
+</div>
 
       <h3>Sales</h3>
       {salesList.map(name => (
@@ -97,5 +119,6 @@ export default function App() {
         </div>
       ))}
     </div>
+  </div>
   );
 }
