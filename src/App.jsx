@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const salesList = ["A","B","C","D","E","F","G","H","I","J","K"];
+const salesList = ["Candice","Cathy","Monica","Eva","Joy","Ada","Hazy","Liz","June","Elieen","Viola"];
 
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
