@@ -76,6 +76,15 @@ export default function App() {
 
   const next = getNext();
 
+  const resetAll = async () => {
+  await setDoc(doc(db, "config", "main"), {
+    currentIndex: 0,
+    skipped: []
+  });
+  setCurrentIndex(0);
+  setSkipped([]);
+};
+
   return (
     <div style={{ 
     display: "flex",
@@ -107,17 +116,27 @@ export default function App() {
 
       <h3>Sales</h3>
       {salesList.map(name => (
-        <div key={name} style={{
-          background: (skipped || []).includes(name) ? "#ffdddd" : "#fff",
-          padding: 10,
-          margin: 5
-        }}>
-          {name}
-          <button onClick={() => toggleSkip(name)}>
-            {(skipped || []).includes(name) ? "Restore" : "Mark Red"}
-          </button>
-        </div>
+  <div
+    key={name}
+    style={{
+      display: "flex",
+      justifyContent: "space-between",   // 👉 左右分开
+      alignItems: "center",
+      background: (skipped || []).includes(name) ? "#ffdddd" : "#fff",
+      padding: 10,
+      marginBottom: 5
+    }}
+  >
+    <span>{name}</span>
+
+    <button onClick={() => toggleSkip(name)}>
+      {(skipped || []).includes(name) ? "Restore" : "Mark Red"}
+    </button>
+  </div>
       ))}
+      <button onClick={resetAll} style={{ marginTop: 20 }}>
+  Reset System
+</button>
     </div>
   </div>
   );
