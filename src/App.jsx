@@ -48,7 +48,7 @@ export default function App() {
     let index = currentIndex;
     let attempts = 0;
 
-    while (skipped.includes(salesList[index]) && attempts < salesList.length) {
+    while ((skipped || []).includes(salesList[index]) && attempts < salesList.length) {
       index = (index + 1) % salesList.length;
       attempts++;
     }
@@ -65,7 +65,7 @@ export default function App() {
 
   const toggleSkip = async (name) => {
     let newSkipped;
-    if (skipped.includes(name)) {
+    if ((skipped || []).includes(name)) {
       newSkipped = skipped.filter(s => s !== name);
     } else {
       newSkipped = [...skipped, name];
@@ -86,13 +86,13 @@ export default function App() {
       <h3>Sales</h3>
       {salesList.map(name => (
         <div key={name} style={{
-          background: skipped.includes(name) ? "#ffdddd" : "#fff",
+          background: (skipped || []).includes(name) ? "#ffdddd" : "#fff",
           padding: 10,
           margin: 5
         }}>
           {name}
           <button onClick={() => toggleSkip(name)}>
-            {skipped.includes(name) ? "Restore" : "Mark Red"}
+            {(skipped || []).includes(name) ? "Restore" : "Mark Red"}
           </button>
         </div>
       ))}
